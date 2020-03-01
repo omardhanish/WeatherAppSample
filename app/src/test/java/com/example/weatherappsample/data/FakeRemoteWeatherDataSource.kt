@@ -14,28 +14,22 @@ class FakeRemoteWeatherDataSource : WeatherDataSource
 
     lateinit var response : Response
 
-    override suspend fun getCurrentWeather(): MutableLiveData<Result<CurrentWeather>> {
-        val liveData = MutableLiveData<Result<CurrentWeather>>()
-
+    override suspend fun getCurrentWeather(): Result<CurrentWeather> {
         if(response == Response.SUCCESS){
-            liveData.value = Result.Success(CurrentWeather());
+            return Result.Success(CurrentWeather());
         }else{
-            liveData.value = Result.Error(Exception("something went wrong"))
+            return Result.Error(Exception("something went wrong"))
         }
-
-        return liveData
     }
 
-    override suspend fun getForeCastWeather(): MutableLiveData<Result<WeatherForeCast>> {
-        val liveData = MutableLiveData<Result<WeatherForeCast>>()
+    override suspend fun getForeCastWeather(): Result<WeatherForeCast> {
 
         if(response == Response.SUCCESS){
-            liveData.value = Result.Success(WeatherForeCast());
+            return Result.Success(WeatherForeCast());
         }else{
-            liveData.value = Result.Error(Exception("something went wrong"))
+            return Result.Error(Exception("something went wrong"))
         }
 
-        return liveData
     }
 
 }

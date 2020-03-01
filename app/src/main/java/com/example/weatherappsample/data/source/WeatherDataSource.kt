@@ -9,8 +9,8 @@ import retrofit2.Response
 interface WeatherDataSource
 {
 
-    suspend fun getCurrentWeather() : MutableLiveData<Result<CurrentWeather>>
+    suspend fun getCurrentWeather() : Result<CurrentWeather>
 
-    suspend fun getForeCastWeather() : MutableLiveData<Result<WeatherForeCast>>
+    suspend fun getForeCastWeather() : Result<WeatherForeCast>
 
 }

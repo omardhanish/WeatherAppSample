@@ -17,53 +17,41 @@ class WeatherRemoteDataSource(
 ) : WeatherDataSource
 {
 
-    override suspend fun getCurrentWeather(): MutableLiveData<Result<CurrentWeather>> {
-
-        val liveData = MutableLiveData<Result<CurrentWeather>>()
-        liveData.postValue(Result.Loading)
-
-        val response = withContext(disPatcher) {
-            weatherApi.getCurrentTemp()
-        }
+    override suspend fun getCurrentWeather(): Result<CurrentWeather> {
 
         try
         {
+            val response = withContext(disPatcher) {
+                weatherApi.getCurrentTemp()
+            }
+
             if(response.isSuccessful){
-                Log.e("CurrentWeather" , Gson().toJson(response.body()))
-                liveData.postValue( Result.Success(response.body()!!))
+                return Result.Success(response.body()!!)
             }else{
-                liveData.postValue(Result.Error(Exception("Something went Wrong")))
+                return Result.Error(Exception("Something went Wrong"))
             }
         }catch (e: Exception) {
-            liveData.postValue(Result.Error(e))
+            return Result.Error(e)
         }
-
-        return liveData
     }
 
 
-    override suspend fun getForeCastWeather(): MutableLiveData<Result<WeatherForeCast>> {
-
-        val liveData = MutableLiveData<Result<WeatherForeCast>>()
-        liveData.postValue(Result.Loading)
-
-        val response = withContext(disPatcher){
-            weatherApi.getForecast()
-        }
-
+    override suspend fun getForeCastWeather(): Result<WeatherForeCast> {
         try
         {
+            val response = withContext(disPatcher){
+                weatherApi.getForecast()
+            }
+
             if(response.isSuccessful){
-                Log.e("ForeCastWeather" , Gson().toJson(response.body()))
-                liveData.postValue(Result.Success(response.body()!!))
+                return Result.Success(response.body()!!)
             }else{
-                liveData.postValue(Result.Error(Exception()))
+                return Result.Error(Exception())
             }
         }catch (e: Exception) {
-            liveData.postValue(Result.Error(e))
+            return Result.Error(e)
         }
 
-        return liveData
     }
 
 }

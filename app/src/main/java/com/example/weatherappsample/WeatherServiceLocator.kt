@@ -1,18 +1,12 @@
 package com.example.weatherappsample
 
-import android.content.Context
 import com.example.weatherappsample.data.source.DefaultWeatherRepository
 import com.example.weatherappsample.data.source.WeatherDataSource
 import com.example.weatherappsample.data.source.WeatherRepository
 import com.example.weatherappsample.data.source.remote.WeatherApi
 import com.example.weatherappsample.data.source.remote.WeatherRemoteDataSource
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import okhttp3.ConnectionSpec
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
 
 object WeatherServiceLocator
 {

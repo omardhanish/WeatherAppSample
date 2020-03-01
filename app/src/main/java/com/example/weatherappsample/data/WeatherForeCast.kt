@@ -10,7 +10,7 @@ data class WeatherForeCast(
     @SerializedName("cod")
     val cod: String = "",
     @SerializedName("list")
-    val list: List<X> = emptyList(),
+    val list: List<ForeCastDetail> = emptyList(),
     @SerializedName("message")
     val message: Int = -1
 )
@@ -35,19 +35,19 @@ data class City(
 )
 
 
-data class X(
+data class ForeCastDetail(
     @SerializedName("clouds")
-    val clouds: Clouds,
+    val clouds: Clouds? = null,
     @SerializedName("dt")
-    val dt: Int,
+    val dt: Int? = -1,
     @SerializedName("dt_txt")
-    val dtTxt: String,
+    val dtTxt: String? = "",
     @SerializedName("main")
-    val main: Main,
+    val main: Main? = null,
     @SerializedName("sys")
-    val sys: Sys,
+    val sys: Sys? = null,
     @SerializedName("weather")
-    val weather: List<Weather>,
+    val weather: List<Weather> = emptyList(),
     @SerializedName("wind")
-    val wind: Wind
+    val wind: Wind? = null
 )
